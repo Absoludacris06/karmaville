@@ -44,6 +44,7 @@ describe User do
     it 'returns both the first and last names in a single string' do
       user.first_name = 'John'
       user.last_name  = 'Doe'
+      user.save
 
       user.full_name.should eq 'John Doe'
     end
