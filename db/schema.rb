@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(:version => 20130923191654) do
   add_index "karma_points", ["user_id", "value"], :name => "index_karma_points_on_user_id_and_value"
 
   create_table "users", :force => true do |t|
-    t.string   "first_name",                :null => false
-    t.string   "last_name",                 :null => false
-    t.string   "username",    :limit => 32, :null => false
-    t.string   "email",                     :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "total_karma"
+    t.string   "first_name",                               :null => false
+    t.string   "last_name",                                :null => false
+    t.string   "username",    :limit => 32,                :null => false
+    t.string   "email",                                    :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "total_karma",               :default => 0
     t.string   "full_name"
   end
 

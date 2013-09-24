@@ -44,9 +44,26 @@ describe User do
     it 'returns both the first and last names in a single string' do
       user.first_name = 'John'
       user.last_name  = 'Doe'
-      user.save
+      user.create_full_name
 
       user.full_name.should eq 'John Doe'
+    end
+  end
+
+  describe '#page' do
+    1000.times { |i| let!("user_#{i}".to_sym) { create(:user_with_karma, :total => rand(500), :points => 1) } }
+
+    it 'returns 100 users sorted by karma for the given page number' do
+      expect(User.page(1).first).to eq User.by_karma[0...100].first
+      expect(User.page(1).last).to eq User.by_karma[0...100].last
+    end
+
+    it "returns the first page if page number isn't specified" do
+      expect(User.page).to eq User.by_karma[0...100]
+    end
+
+    it "returns the last page if given a page number greater than the total page number" do
+      expect(User.page(1000000)).to eq User.by_karma[900..-1]
     end
   end
 end

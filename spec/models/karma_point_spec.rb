@@ -19,7 +19,7 @@ describe KarmaPoint do
 
     it "increments the user's total_karma by the value of the karma point" do
       expect {
-        KarmaPoint.create(:user_id => user.id, :value => 10, :label => "Something")
+        create(:karma_point, :user_id => user.id, :value => 10, :label => "Something")
       }.to change(user, :total_karma).by(10)
     end
   end

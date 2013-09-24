@@ -7,21 +7,24 @@ gem 'bcrypt-ruby'
 
 gem 'pg'
 gem 'jquery-rails'
+gem 'will_paginate', '~> 3.0.5'
+gem 'bootstrap-will_paginate'
 
 group :development do
   gem 'quiet_assets'
-  gem 'activerecord-import'
 end
 
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'activerecord-import'
 end
 
 group :test do
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :assets do

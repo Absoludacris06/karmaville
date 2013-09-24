@@ -19,18 +19,22 @@ class User < ActiveRecord::Base
 
 
   def self.by_karma
-    order('total_karma DESC')
+    order('total_karma DESC, id ASC')
   end
 
   def update_total_karma
-    puts "you're here"
-    puts self
     self.update_attribute(:total_karma, self.karma_points.sum(:value))
-    puts self.id
   end
 
   def create_full_name
     self.update_attribute(:full_name, "#{self.first_name} #{self.last_name}")
-    puts self.id
+  end
+
+  def self.page(page_num=nil)
+    entries_per_page = 100
+    total_pages = User.all.length / entries_per_page
+    page_num = 1 if page_num.nil? || page_num <= 0
+    page_num = total_pages if page_num > total_pages
+    User.by_karma.limit(entries_per_page).offset((page_num - 1) * entries_per_page)
   end
 end
